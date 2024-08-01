@@ -1,9 +1,7 @@
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
-export const config = {
-  runtime: 'edge', // Ensure the route is treated as dynamic
-};
+export const runtime = 'edge'; // Ensure the route is treated as dynamic
 export async function GET(req: NextRequest) {
   try {
     const apiKey = process.env.OPENWEATHERMAP_API_KEY;

@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export const config = {
-  runtime: 'edge', // Ensure the route is treated as dynamic
-};
+export const runtime = 'edge'; // Ensure the route is treated as dynamic
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
