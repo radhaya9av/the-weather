@@ -1,9 +1,13 @@
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
+export const config = {
+  runtime: 'edge', // Ensure the route is treated as dynamic
+};
+
 export async function GET(req: NextRequest) {
   try {
-    const searchParams = req.nextUrl.searchParams;
+    const { searchParams } = new URL(req.url);
     const lat = searchParams.get("lat");
     const lon = searchParams.get("lon");
 
@@ -15,7 +19,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(res.data);
   } catch (error) {
-    console.log("Error in getting pollusion data ", error);
+    console.log("Error in getting pollution data ", error);
     return new Response("Error fetching pollution data", { status: 500 });
   }
 }

@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
+export const config = {
+  runtime: 'edge', // Ensure the route is treated as dynamic
+};
 export async function GET(req: NextRequest) {
   try {
-    const searchParams = req.nextUrl.searchParams;
+    const { searchParams } = new URL(req.url);
 
     const lat = searchParams.get("lat");
     const lon = searchParams.get("lon");
