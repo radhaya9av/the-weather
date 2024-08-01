@@ -3,6 +3,13 @@ import React from "react";
 import { useGlobalContext } from "@/app/context/globalContext";
 import { clearSky, cloudy, drizzleIcon, rain, snow } from "@/app/utils/Icons";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import moment from "moment";
+import { kelvinToCelsius } from "@/app/utils/misc";
 
 function DailyForecast() {
   const { forecast, fiveDayForecast } = useGlobalContext();
@@ -66,7 +73,30 @@ function DailyForecast() {
             </h1>
           </div>
         ) : (
-          <div></div>
+          <div className="w-full">
+            <Carousel>
+              <CarouselContent>
+                {todaysForecast.map(
+                  (forecast: { dt_txt: string; main: { temp: number } }) => {
+                    return (
+                      <CarouselItem
+                        key={forecast.dt_txt}
+                        className="flex flex-col gap-4 basis-[8.5rem] cursor-grab"
+                      >
+                        <p className=" text-gray-300">
+                          {moment(forecast.dt_txt).format("HH:mm")}
+                        </p>
+                        <p>{getIcon()}</p>
+                        <p className="mt-4">
+                          {kelvinToCelsius(forecast.main.temp)}°C
+                        </p>
+                      </CarouselItem>
+                    );
+                  }
+                )}
+              </CarouselContent>
+            </Carousel>
+          </div>
         )}
       </div>
     </div>
