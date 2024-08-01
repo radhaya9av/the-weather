@@ -1,9 +1,7 @@
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
-export const config = {
-  runtime: 'edge', // Ensure the route is treated as dynamic
-};
+export const runtime = 'edge'; // Ensure the route is treated as dynamic
 
 export async function GET(req: NextRequest) {
   try {
@@ -24,7 +22,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(dailyData);
   } catch (error) {
-    console.log("Error in getting daily data ");
+    console.log("Error in getting daily data ", error);
     return new Response("Error in getting daily data ", { status: 500 });
   }
 }
