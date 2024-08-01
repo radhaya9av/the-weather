@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -13,6 +14,12 @@ function Navbar() {
 
   return (
     <div className="w-full py-4 flex items-center justify-between">
+      <div className="right">
+        <a href="/">
+          <Image src={"/the-weather.svg"} alt="logo" width={100} height={100} />
+        </a>
+      </div>
+
       <div className="left"></div>
       <div className="search-container flex shrink-0 w-full gap-2 sm:w-fit">
         <SearchDialog />
